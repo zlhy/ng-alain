@@ -61,6 +61,25 @@ export class DashboardAnalysisComponent implements OnInit {
 
   setDate(type: any) {
     this.date_range = getTimeDistance(type);
+    if (type === 'today') {
+      this.setSalesData(1);
+    } else if (type === 'week') {
+      this.setSalesData(7);
+    } else if (type === 'month') {
+      this.setSalesData(30);
+    } else {
+      this.setSalesData(12);
+    }
+  }
+
+  setSalesData(days) {
+    this.data.salesData = [];
+    for (let i = 0; i < days; i += 1) {
+      this.data.salesData.push({
+        x: `${i + 1}天`,
+        y: Math.floor(Math.random() * 1000) + 200,
+      });
+    }
   }
 
   salesType = 'all';
